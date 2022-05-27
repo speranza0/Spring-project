@@ -1,10 +1,10 @@
-package com.devhyun;
+package com.devhyun.webmvc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WebApplicationTests {
+class WebMvcApplicationTests {
 
 	@Test
 	void contextLoads() {

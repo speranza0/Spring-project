@@ -1,4 +1,4 @@
-package com.devhyun.core.web;
+package com.devhyun.webmvc.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +15,10 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Bean
     public ViewResolver jspViewResolver() {
-        InternalResourceViewResolver bean = new InternalResourceViewResolver();
-        bean.setPrefix("/WEB-INF/view/");
-        bean.setSuffix(".jsp");
-        return bean;
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/src/main/webapp/WEB-INF/view/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
     }
 	
 	@Override
