@@ -1,14 +1,13 @@
 package com.devhyun.webmvc.common.services.user;
 
+import com.devhyun.webmvc.common.services.role.RoleVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,11 +23,11 @@ public class UserVO implements UserDetails {
 
     private String password;
 
+    private List<RoleVO> roles;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        return authorities;
+        return this.roles;
     }
 
     @Override

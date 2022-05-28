@@ -1,6 +1,8 @@
 package com.devhyun.webmvc.common.security;
 
 import com.devhyun.webmvc.common.exception.SecurityException;
+import com.devhyun.webmvc.common.services.role.RoleMapper;
+import com.devhyun.webmvc.common.services.role.RoleVO;
 import com.devhyun.webmvc.common.services.user.UserMapper;
 import com.devhyun.webmvc.common.services.user.UserVO;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
+
 public class SecurityProvider implements AuthenticationProvider {
 
     @Autowired
@@ -18,6 +22,9 @@ public class SecurityProvider implements AuthenticationProvider {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    RoleMapper roleMapper;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -38,6 +45,9 @@ public class SecurityProvider implements AuthenticationProvider {
         if(!passwordEncoder.matches(password, user.getPassword())) {
             throw new SecurityException("아이디 또는 비밀번호를 확인해주세요.");
         }
+
+        List<RoleVO> roles = roleMapper.selectByUserId(user.getId());
+        user.setRoles(roles);
 
         return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
     }

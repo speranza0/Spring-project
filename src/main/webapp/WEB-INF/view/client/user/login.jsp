@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/default.css" />
 </head>
 <body>
-<form id="form" action="/user/login" method="post">
+<form id="form" action="/api/user/login" method="post">
     <input type="text" name="username" />
     <input type="password" name="password" />
     <button type="submit">로그인</button>

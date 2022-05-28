@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.devhyun.webmvc.common.services.role.RoleMapper">
+
+    <select id="selectByUserId" resultType="com.devhyun.webmvc.common.services.role.RoleVO">
+        SELECT tbr.*
+        FROM tb_role tbr
+        LEFT JOIN tr_user_role trur
+        ON trur.role_id = tbr.id
+        WHERE trur.user_id = #{userId};
+    </select>
+
+</mapper>
