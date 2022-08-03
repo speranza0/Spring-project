@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 public class UserVO implements UserDetails {
 
-    private String id;
+    private int id;
 
     private String username;
 

@@ -2,15 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.devhyun.webmvc.common.services.user.UserMapper">
-    <!--
-        SELECT
-             tu.*
-            ,tr.namekey
-            ,tr.name
-        FROM tb_user tu
-        LEFT OUTER JOIN (tr_user_role as tur INNER JOIN tb_role as tr ON tur.role_id = tr.id) ON tu.id = tur.user_id
-        WHERE tu.username = #{username};
-    -->
     <select id="selectByUsername" resultType="com.devhyun.webmvc.common.services.user.UserVO">
         SELECT *
         FROM tb_user tbu

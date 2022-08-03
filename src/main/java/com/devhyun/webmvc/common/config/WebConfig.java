@@ -25,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
         .addResourceHandler("/**")
-        .addResourceLocations(new String[] {"classpath:/WEB-INF/static/"})
+        .addResourceLocations("/WEB-INF/static/")
         .setCachePeriod(3600)
         .resourceChain(true)
         .addResolver(new PathResourceResolver());

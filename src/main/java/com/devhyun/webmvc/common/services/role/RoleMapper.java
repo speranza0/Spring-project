@@ -7,6 +7,6 @@ import java.util.List;
 @Mapper
 public interface RoleMapper {
 
-    List<RoleVO> selectByUserId(String userId);
+    List<RoleVO> selectByUserId(int userId);
 
 }

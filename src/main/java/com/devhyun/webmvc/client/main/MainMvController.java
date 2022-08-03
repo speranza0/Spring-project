@@ -5,10 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MainController {
+public class MainMvController {
 	
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model) throws Exception {
+		//throw new Exception("에러");
 		return "index";
 	}
 	

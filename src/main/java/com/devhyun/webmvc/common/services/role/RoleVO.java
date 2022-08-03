@@ -4,7 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 public class RoleVO implements GrantedAuthority {
 
-    private String id;
+    private int id;
 
     private String namekey;
 
