@@ -11,4 +11,9 @@
         WHERE trur.user_id = #{userId};
     </select>
 
+    <insert id="insertUserRole">
+        INSERT INTO tr_user_role
+        VALUES(#{userId}, 2);
+    </insert>
+
 </mapper>

@@ -14,3 +14,5 @@
     <c:set var="isUser" value="true" scope="request"/>
 </sec:authorize>
 <link rel="stylesheet" href="/css/common.css" />
+<link rel="stylesheet" href="/css/bootstrap.css" />
+<link rel="stylesheet" href="/css/custom.css" />

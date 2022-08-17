@@ -9,4 +9,6 @@ public interface RoleMapper {
 
     List<RoleVO> selectByUserId(int userId);
 
+    void insertUserRole(int userId);
+
 }

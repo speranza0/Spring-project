@@ -8,4 +8,8 @@
         WHERE tbu.username = #{username};
     </select>
 
+    <insert id="joinUser" parameterType="com.devhyun.webmvc.common.services.user.UserVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO tb_user (username, password) VALUES(#{username}, #{password})
+    </insert>
+
 </mapper>

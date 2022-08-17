@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
 
     UserVO selectByUsername(String username);
-
+    void joinUser(UserVO userVO);
 }

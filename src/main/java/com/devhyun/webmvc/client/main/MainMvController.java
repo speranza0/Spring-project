@@ -1,10 +1,10 @@
 package com.devhyun.webmvc.client.main;
 
-import org.springframework.stereotype.Controller;
+import com.devhyun.webmvc.common.core.MvController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
+@MvController
 public class MainMvController {
 	
 	@GetMapping("/")

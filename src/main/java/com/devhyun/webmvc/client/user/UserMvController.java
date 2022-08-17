@@ -1,17 +1,32 @@
 package com.devhyun.webmvc.client.user;
 
 import com.devhyun.webmvc.common.core.MvController;
+import com.devhyun.webmvc.common.services.user.UserService;
+import com.devhyun.webmvc.common.services.user.UserVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @MvController
 @RequestMapping("/user")
 public class UserMvController {
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public String login(Model model) {
         return "client/user/login";
     }
 
+    @GetMapping("/join")
+    public String joinView(Model model) {
+        return "client/user/join";
+    }
+
+    @PostMapping("/join")
+    public String join(@ModelAttribute UserVO param, Model model) {
+        userService.joinUser(param);
+        return "redirect:/";
+    }
 }
