@@ -1,9 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<sec:authentication property="principal" var="UserVO" scope="request"/>
+<sec:authentication property="principal" var="user" scope="request"/>
 <sec:authorize access="isAnonymous()">
-    <c:set var="UserVO" value="" scope="request"/>
+    <c:set var="user" value="" scope="request"/>
 </sec:authorize>
 <sec:authorize access="hasRole('ADMIN')">
     <%-- 관리자 권한 --%>

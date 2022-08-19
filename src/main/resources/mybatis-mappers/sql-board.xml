@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.devhyun.webmvc.common.services.board.BoardMapper">
+    <select id="selectByUsername" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
+        SELECT *
+        FROM tb_user tbu
+        WHERE tbu.username = #{username};
+    </select>
+
+    <insert id="postWrite" parameterType="com.devhyun.webmvc.common.services.board.BoardVO">
+        INSERT INTO tb_board_list (username, postTitle, postContent) VALUES(#{username}, #{postTitle}, #{postContent})
+    </insert>
+
+</mapper>

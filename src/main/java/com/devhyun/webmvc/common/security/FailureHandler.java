@@ -19,7 +19,7 @@ public class FailureHandler implements AuthenticationFailureHandler {
         FlashMap flashMap = new FlashMap();
         FlashMapManager flashMapManager = new SessionFlashMapManager();
 
-        flashMap.put("message", message);
+        flashMap.put("error", message);
         flashMapManager.saveOutputFlashMap(flashMap, request, response);
 
         response.sendRedirect(request.getHeader("referer"));

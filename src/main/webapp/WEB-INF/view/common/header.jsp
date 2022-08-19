@@ -24,17 +24,16 @@
   <c:if test="${not empty user}">
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="main">공지사항</a></li>
-        <li><a href="marble">게시판</a></li>
-        <li><a href="list">랭킹</a></li>
-        <li><a href="#">${user.id}님 환영합니다.</a>
+        <li><a href="/board/notice">공지사항</a></li>
+        <li><a href="/board/list">게시판</a></li>
+        <li><a href="#">${user.username}님 환영합니다.</a>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             회원관리<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="logout">로그아웃</a></li>
+            <li><a href="/api/user/logout">로그아웃</a></li>
           </ul>
         </li>
       </ul>
@@ -43,7 +42,7 @@
   <c:if test="${empty user}">
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="main">공지사항</a></li>
+        <li><a href="/board/notice">공지사항</a></li>
         <li><a href="/board/list">게시판</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

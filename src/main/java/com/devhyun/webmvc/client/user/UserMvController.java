@@ -1,6 +1,7 @@
 package com.devhyun.webmvc.client.user;
 
 import com.devhyun.webmvc.common.core.MvController;
+import com.devhyun.webmvc.common.services.user.UserMapper;
 import com.devhyun.webmvc.common.services.user.UserService;
 import com.devhyun.webmvc.common.services.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserMvController {
 
     @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
-    public String login(Model model) {
+    public String login() {
         return "client/user/login";
     }
 
@@ -27,6 +31,7 @@ public class UserMvController {
     @PostMapping("/join")
     public String join(@ModelAttribute UserVO param, Model model) {
         userService.joinUser(param);
-        return "redirect:/";
+        model.addAttribute("user", param);
+        return "client/user/welcome";
     }
 }
