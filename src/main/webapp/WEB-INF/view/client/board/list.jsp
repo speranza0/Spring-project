@@ -22,22 +22,17 @@
                 <th style="background-color: #eeeeee; text-align: center;">작성일</th>
             </tr>
             </thead>
-<%--            <tbody>--%>
-<%--            <%--%>
-<%--                BbsDAO bbsDAO = new BbsDAO();--%>
-<%--                ArrayList<Bbs> list = bbsDAO.getList(pageNumber);--%>
-<%--                for(int i = 0; i < list.size(); i++){--%>
-<%--            %>--%>
-<%--            <tr>--%>
-<%--                <td><%= list.get(i).getBbsID() %></td>--%>
-<%--                <td><a href="view.jsp?bbsID=<%= list.get(i).getBbsID()%>"><%= list.get(i).getBbsTitle() %></a></td>--%>
-<%--                <td><%= list.get(i).getBbsUserID() %></td>--%>
-<%--                <td><%= list.get(i).getBbsDate().substring(0, 11) + list.get(i).getBbsDate().substring(11, 13) + "시 " + list.get(i).getBbsDate().substring(14, 16) + "분" %></td>--%>
-<%--            </tr>--%>
-<%--            <%--%>
-<%--                }--%>
-<%--            %>--%>
-<%--            </tbody>--%>
+            <tbody>
+            <c:forEach items="${list}" var="listup">
+                <c:set var ="i" value="${i+1}" />
+                <tr>
+                    <td>${listup.idx}</td>
+                    <td><a href="/board/view?idx=${listup.idx}">${listup.postTitle}</a></td>
+                    <td>${listup.username}</td>
+                    <td>${listup.postDate}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
         </table>
 <%--        <%--%>
 <%--            if(pageNumber != 1) {--%>

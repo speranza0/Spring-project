@@ -34,4 +34,17 @@ public class UserMvController {
         model.addAttribute("user", param);
         return "client/user/welcome";
     }
+
+    @GetMapping("/userModify")
+    public String modifyView(UserVO param, Model model) {
+        UserVO userVO = userMapper.selectByUsername(param.getUsername());
+        model.addAttribute("userInfo", userVO);
+        return "client/user/userModify";
+    }
+
+    @PostMapping("/userModify")
+    public String modify(UserVO param, Model model) {
+        userService.userModify(param);
+        return "index";
+    }
 }

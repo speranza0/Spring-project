@@ -7,4 +7,6 @@ public interface UserMapper {
 
     UserVO selectByUsername(String username);
     void joinUser(UserVO userVO);
+
+    void userModify(UserVO userVO);
 }

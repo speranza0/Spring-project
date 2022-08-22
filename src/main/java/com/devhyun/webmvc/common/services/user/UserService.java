@@ -23,4 +23,11 @@ public class UserService {
 
         roleMapper.insertUserRole(param.getId());
     }
+
+    @Transactional
+    public void userModify(UserVO param) {
+        String password = passwordEncoder.encode(param.getPassword());
+        param.setPassword(password);
+        userMapper.userModify(param);
+    }
 }

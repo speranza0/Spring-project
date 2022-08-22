@@ -12,4 +12,8 @@
         INSERT INTO tb_user (username, password) VALUES(#{username}, #{password})
     </insert>
 
+    <update id="userModify">
+        UPDATE tb_user SET password = #{password} WHERE username = #{username}
+    </update>
+
 </mapper>

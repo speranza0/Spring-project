@@ -18,6 +18,14 @@ public class MvcExceptionHandler {
     }
 
 
+    @ExceptionHandler(NotFoundException.class)
+    public String handleNotFoundException(Exception exception, Model model) {
+        log.error("NotFoundException", exception);
+        model.addAttribute("errorMessage", exception.getMessage());
+        return "error/404";
+    }
+
+
     @ExceptionHandler(Exception.class)
     public String handleException(Exception exception, Model model) {
         log.error("Internal Server Error", exception);

@@ -2,8 +2,18 @@ package com.devhyun.webmvc.common.services.board;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.ArrayList;
+
 @Mapper
 public interface BoardMapper {
 
+    ArrayList<BoardVO> postList(BoardVO boardVO);
+
+    BoardVO postView(BoardVO boardVO);
+
     void postWrite(BoardVO boardVO);
+
+    void postUpdate(BoardVO boardVO);
+
+    void postDelete(BoardVO boardVO);
 }

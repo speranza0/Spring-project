@@ -3,6 +3,7 @@ package com.devhyun.webmvc.client.board;
 import com.devhyun.webmvc.common.core.AuthUser;
 import com.devhyun.webmvc.common.core.Authentication;
 import com.devhyun.webmvc.common.core.MvController;
+import com.devhyun.webmvc.common.exception.NotFoundException;
 import com.devhyun.webmvc.common.services.board.BoardService;
 import com.devhyun.webmvc.common.services.board.BoardVO;
 import com.devhyun.webmvc.common.services.user.UserVO;
@@ -19,8 +20,9 @@ public class BoardMvController {
     @Autowired
     private BoardService boardService;
 
-    @GetMapping("/list")
-    public String list(Model model) {
+    @RequestMapping (value = "/list")
+    public String list(BoardVO param, Model model) {
+        model.addAttribute("list", boardService.postList(param));
         return "client/board/list";
     }
 
@@ -34,7 +36,35 @@ public class BoardMvController {
     public String write(@AuthUser UserVO user, BoardVO param) {
         param.setUsername(user.getUsername());
         boardService.postWrite(param);
-        return "client/board/list";
+        return "redirect:/board/list";
+    }
+
+    @RequestMapping("/view")
+    public String postView(BoardVO param, Model model) {
+        BoardVO boardVO = boardService.postView(param);
+
+        if(boardVO == null) {
+            throw new NotFoundException("게시글을 찾을 수 없습니다.");
+        }
+        model.addAttribute("view", boardService.postView(param));
+        return "client/board/view";
+    }
+    @GetMapping("/update")
+    public String updateView(BoardVO param, Model model) {
+        model.addAttribute("updateView", boardService.postView(param));
+        return "client/board/update";
+    }
+
+    @PostMapping("/update")
+    public String update(BoardVO param) {
+        boardService.postUpdate(param);
+        return "redirect:/board/list";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(BoardVO param) {
+        boardService.postDelete(param);
+        return "redirect:/board/list";
     }
 
     @GetMapping("/notice")
