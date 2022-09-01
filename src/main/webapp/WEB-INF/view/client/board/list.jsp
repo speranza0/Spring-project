@@ -28,7 +28,7 @@
                 <tr>
                     <td>${listup.idx}</td>
                     <td><a href="/board/view?idx=${listup.idx}">${listup.postTitle}</a></td>
-                    <td>${listup.username}</td>
+                    <td>${listup.nickname}</td>
                     <td>${listup.postDate}</td>
                 </tr>
             </c:forEach>

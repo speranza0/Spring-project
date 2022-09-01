@@ -13,7 +13,7 @@
 <%@ include file="/WEB-INF/view/common/header.jsp" %>
 <div class="container">
     <div class="row">
-        <form method="post" action="/board/write">
+        <form method="post" action="/board/write" enctype="multipart/form-data">
             <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
                 <thead>
                 <tr>
@@ -26,6 +26,9 @@
                 </tr>
                 <tr>
                     <td><textarea class="form-control" placeholder="글 내용" name="postContent" maxlength="2048" style="height: 350px;"></textarea></td>
+                </tr>
+                <tr>
+                    <td><input type="file" name="uploadFile"></td>
                 </tr>
                 </tbody>
             </table>

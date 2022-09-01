@@ -21,6 +21,9 @@
           <input type="text" class="form-control" placeholder="아이디" name="username" maxlength="20" value="${userInfo.username}" readonly>
         </div>
         <div class="form-group">
+          <input type="text" class="form-control" placeholder="닉네임" name="nickname" maxlength="20" value="${userInfo.nickname}">
+        </div>
+        <div class="form-group">
           <input type="password" class="form-control" placeholder="비밀번호" name="password" maxlength="20">
         </div>
         <input type="submit" class="btn btn-primary form-control" value="회원정보 수정">

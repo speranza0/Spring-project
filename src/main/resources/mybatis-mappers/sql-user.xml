@@ -13,7 +13,7 @@
     </insert>
 
     <update id="userModify">
-        UPDATE tb_user SET password = #{password} WHERE username = #{username}
+        UPDATE tb_user SET nickname = #{nickname}, password = #{password} WHERE username = #{username}
     </update>
 
 </mapper>

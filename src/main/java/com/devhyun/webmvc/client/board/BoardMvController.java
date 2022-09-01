@@ -6,6 +6,7 @@ import com.devhyun.webmvc.common.core.MvController;
 import com.devhyun.webmvc.common.exception.NotFoundException;
 import com.devhyun.webmvc.common.services.board.BoardService;
 import com.devhyun.webmvc.common.services.board.BoardVO;
+import com.devhyun.webmvc.common.services.board.FileStore;
 import com.devhyun.webmvc.common.services.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -13,12 +14,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.ServletException;
+import java.io.IOException;
+
 @MvController
 @RequestMapping("/board")
 public class BoardMvController {
 
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private FileStore fileStore;
 
     @RequestMapping (value = "/list")
     public String list(BoardVO param, Model model) {
@@ -33,8 +39,10 @@ public class BoardMvController {
     }
 
     @PostMapping("/write")
-    public String write(@AuthUser UserVO user, BoardVO param) {
+    public String write(@AuthUser UserVO user, BoardVO param) throws ServletException, IOException {
         param.setUsername(user.getUsername());
+        BoardVO vo = fileStore.uploadFile(param.getUploadFile());
+        param.setFileName(vo.getFileName());
         boardService.postWrite(param);
         return "redirect:/board/list";
     }
@@ -49,6 +57,7 @@ public class BoardMvController {
         model.addAttribute("view", boardService.postView(param));
         return "client/board/view";
     }
+
     @GetMapping("/update")
     public String updateView(BoardVO param, Model model) {
         model.addAttribute("updateView", boardService.postView(param));

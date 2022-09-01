@@ -3,15 +3,15 @@
 
 <mapper namespace="com.devhyun.webmvc.common.services.board.BoardMapper">
     <select id="postList" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
-        SELECT * FROM tb_board_list ORDER BY idx desc
+        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username ORDER BY idx desc
     </select>
 
     <select id="postView" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
-        SELECT * FROM tb_board_list WHERE idx = #{idx}
+        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username WHERE idx = #{idx}
     </select>
 
     <insert id="postWrite" parameterType="com.devhyun.webmvc.common.services.board.BoardVO">
-        INSERT INTO tb_board_list (username, postTitle, postContent) VALUES(#{username}, #{postTitle}, #{postContent})
+        INSERT INTO tb_board_list (username, postTitle, postContent, filename) VALUES(#{username}, #{postTitle}, #{postContent}, #{fileName})
     </insert>
 
     <update id="postUpdate" parameterType="com.devhyun.webmvc.common.services.board.BoardVO">

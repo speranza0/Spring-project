@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td>작성자</td>
-                <td colspan="2">${view.username}</td>
+                <td colspan="2">${view.nickname}</td>
             </tr>
             <tr>
                 <td>작성일자</td>
@@ -35,6 +35,10 @@
             <tr>
                 <td>내용</td>
                 <td colspan="2" style="height: 200px; text-align: center;">${view.postContent}</td>
+            </tr>
+            <tr>
+                <td>첨부파일</td>
+                <td colspan="2">${view.fileName}</td>
             </tr>
             </tbody>
         </table>

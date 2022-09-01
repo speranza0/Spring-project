@@ -26,7 +26,7 @@
       <ul class="nav navbar-nav">
         <li><a href="/board/notice">공지사항</a></li>
         <li><a href="/board/list">게시판</a></li>
-        <li><a href="#">${user.username}님 환영합니다.</a>
+        <li><a href="#">${user.nickname}님 환영합니다.</a>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
