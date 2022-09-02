@@ -23,6 +23,10 @@ public class BoardService {
         return boardMapper.postView(param);
     }
 
+    public BoardVO attachFileDown(BoardVO param) {
+        return boardMapper.attachFileDown(param);
+    }
+
     public BoardVO updateView(BoardVO param) {
         return boardMapper.postView(param);
     }

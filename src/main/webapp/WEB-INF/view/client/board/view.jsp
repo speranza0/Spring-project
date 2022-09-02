@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td>첨부파일</td>
-                <td colspan="2">${view.fileName}</td>
+                <td colspan="2"><a href="/board/attachFile?fileUUID=${view.fileUUID}">${view.fileName}</a></td>
             </tr>
             </tbody>
         </table>

@@ -26,10 +26,13 @@ public class BoardVO {
 
     private String fileName;
 
+    private String fileUUID;
+
     private MultipartFile uploadFile;
 
 
-    public BoardVO(String fileName) {
+    public BoardVO(String fileName, String fileUUID) {
         this.fileName = fileName;
+        this.fileUUID = fileUUID;
     }
 }

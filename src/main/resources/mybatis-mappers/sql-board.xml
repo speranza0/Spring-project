@@ -10,8 +10,12 @@
         SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username WHERE idx = #{idx}
     </select>
 
+    <select id="attachFileDown" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
+        SELECT * FROM tb_board_list WHERE fileUUID = #{fileUUID}
+    </select>
+
     <insert id="postWrite" parameterType="com.devhyun.webmvc.common.services.board.BoardVO">
-        INSERT INTO tb_board_list (username, postTitle, postContent, filename) VALUES(#{username}, #{postTitle}, #{postContent}, #{fileName})
+        INSERT INTO tb_board_list (username, postTitle, postContent, filename, fileUUID) VALUES(#{username}, #{postTitle}, #{postContent}, #{fileName}, #{fileUUID})
     </insert>
 
     <update id="postUpdate" parameterType="com.devhyun.webmvc.common.services.board.BoardVO">

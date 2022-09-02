@@ -9,6 +9,8 @@ import com.devhyun.webmvc.common.services.board.BoardVO;
 import com.devhyun.webmvc.common.services.board.FileStore;
 import com.devhyun.webmvc.common.services.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 @MvController
 @RequestMapping("/board")
@@ -43,12 +46,14 @@ public class BoardMvController {
         param.setUsername(user.getUsername());
         BoardVO vo = fileStore.uploadFile(param.getUploadFile());
         param.setFileName(vo.getFileName());
+        param.setFileUUID(vo.getFileUUID());
         boardService.postWrite(param);
         return "redirect:/board/list";
     }
 
+
     @RequestMapping("/view")
-    public String postView(BoardVO param, Model model) {
+    public String postView(BoardVO param, Model model) throws MalformedURLException {
         BoardVO boardVO = boardService.postView(param);
 
         if(boardVO == null) {
@@ -56,6 +61,11 @@ public class BoardMvController {
         }
         model.addAttribute("view", boardService.postView(param));
         return "client/board/view";
+    }
+
+    @GetMapping("/attachFile")
+    public ResponseEntity<Resource> attachFile(BoardVO param) throws MalformedURLException {
+        return fileStore.downloadAttach(param);
     }
 
     @GetMapping("/update")
