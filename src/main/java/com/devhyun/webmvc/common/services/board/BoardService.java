@@ -19,6 +19,10 @@ public class BoardService {
         return boardMapper.postList(param);
     }
 
+    public int getListCnt(BoardVO param) {
+        return boardMapper.getListCnt(param);
+    }
+
     public BoardVO postView(BoardVO param) {
         return boardMapper.postView(param);
     }

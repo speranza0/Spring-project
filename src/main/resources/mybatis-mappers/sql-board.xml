@@ -2,12 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.devhyun.webmvc.common.services.board.BoardMapper">
+    <sql id="boardWhere">
+        <where>
+            <if test="searchKeyword != null and searchKeyword != ''">
+            AND
+            (
+                postTitle like concat('%', #{searchKeyword}, '%')
+                OR postContent like concat('%', #{searchKeyword}, '%')
+            )
+            </if>
+        </where>
+    </sql>
     <select id="postList" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
-        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username ORDER BY idx desc
+        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username
+    <include refid="boardWhere"/>
+        ORDER BY idx desc LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
     </select>
 
     <select id="postView" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
         SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username WHERE idx = #{idx}
+    </select>
+
+    <select id="getListCnt" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tb_board_list
+    <include refid="boardWhere"/>
     </select>
 
     <select id="attachFileDown" resultType="com.devhyun.webmvc.common.services.board.BoardVO">

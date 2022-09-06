@@ -11,8 +11,16 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/view/common/header.jsp" %>
+<form method="get" id="listForm" action="/board/list">
 <div class="container">
     <div class="row">
+        <div>
+            <div class="col-md-8 card-header py-3">
+                <input type="text" id="searchKeyword" name="searchKeyword" value="${searchVO.searchKeyword}" style="width:300px; height:40px;" placeholder="검색어를 입력하세요." />
+                <a href="#" onclick="fn_search();" class="btn btn-primary">검색</a>
+            </div>
+            <span class="col-md-4" style="text-align: right">총 게시물 ${totCnt} / 페이지 (${searchVO.pageIndex} / ${totalPageCnt})</span>
+        </div>
         <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
             <thead>
             <tr>
@@ -27,27 +35,42 @@
                 <c:set var ="i" value="${i+1}" />
                 <tr>
                     <td>${listup.idx}</td>
-                    <td><a href="/board/view?idx=${listup.idx}">${listup.postTitle}</a></td>
+                    <td><a href="/board/view?idx=${listup.idx}&${searchVO.qustr}">${listup.postTitle}</a></td>
                     <td>${listup.nickname}</td>
                     <td>${listup.postDate}</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
-<%--        <%--%>
-<%--            if(pageNumber != 1) {--%>
-<%--        %>--%>
-<%--        <a href="bbs.jsp?pageNumber=<%= pageNumber - 1%>" class="btn btn-success btn-arrow-left">이전</a>--%>
-<%--        <%--%>
-<%--            } if(bbsDAO.nextPage(pageNumber + 1)){--%>
-<%--        %>--%>
-<%--        <a href="bbs.jsp?pageNumber=<%= pageNumber + 1%>" class="btn btn-success btn-arrow-left">다음</a>--%>
-<%--        <%--%>
-<%--            }--%>
-<%--        %>--%>
+        <div class="col-sm-12 col-md-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                <ul class="pagination">
+
+                    <c:if test="${searchVO.prev}">
+                        <li class="paginate_button page-item previous" id="dataTable_previous">
+                            <a href="javascript:void(0);" onclick="fn_go_page(${searchVO.startData - 1}); return false;" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                        </li>
+                    </c:if>
+
+                    <c:forEach var="num" begin="${searchVO.startData}" end="${searchVO.endData}">
+                        <li class="paginate_button page-item">
+                            <a href="javascript:void(0);" onclick="fn_go_page(${num}); return false;" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">${num}</a>
+                        </li>
+                    </c:forEach>
+
+                    <c:if test="${searchVO.next}">
+                        <li class="paginate_button page-item next" id="dataTable_next">
+                            <a href="javascript:void(0);" onclick="fn_go_page(${searchVO.endData + 1}); return false;" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Next</a>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
+        </div>
         <a href="/board/write" class="btn btn-primary pull-right">글쓰기</a>
     </div>
 </div>
+    <input type="hidden" id="pageIndex" name="pageIndex" val="" />
+</form>
 <%@ include file="/WEB-INF/view/common/script.jsp" %>
 </body>
 </html>

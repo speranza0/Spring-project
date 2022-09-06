@@ -38,7 +38,8 @@ public class FileStore {
         String originFilename = file.getOriginalFilename();
         String storeFileName = createStoreFileName(originFilename);
         file.transferTo(new File(getFullPath(storeFileName)));
-        return new BoardVO(originFilename, storeFileName);
+
+        return BoardVO.builder().fileName(originFilename).fileUUID(storeFileName).build();
     }
 
     private String createStoreFileName(String originFilename) {

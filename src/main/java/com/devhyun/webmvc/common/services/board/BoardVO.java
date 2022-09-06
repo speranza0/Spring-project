@@ -1,16 +1,17 @@
 package com.devhyun.webmvc.common.services.board;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.UnsupportedEncodingException;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@Data
-public class BoardVO {
+@Getter
+@Setter
+public class BoardVO extends PageVO{
 
     private int idx;
 
@@ -24,15 +25,20 @@ public class BoardVO {
 
     private String postDate;
 
+    private String searchKeyword;
+
+    private String qustr;
+
     private String fileName;
 
     private String fileUUID;
 
     private MultipartFile uploadFile;
 
-
-    public BoardVO(String fileName, String fileUUID) {
-        this.fileName = fileName;
-        this.fileUUID = fileUUID;
+    public void setQustr() throws UnsupportedEncodingException {
+        String qs = "";
+        this.setQueryString();
+        qs += this.getQueryString();
+        this.qustr = qs;
     }
 }

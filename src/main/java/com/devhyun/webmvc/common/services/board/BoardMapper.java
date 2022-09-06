@@ -11,6 +11,8 @@ public interface BoardMapper {
 
     BoardVO postView(BoardVO boardVO);
 
+    int getListCnt(BoardVO boardVO);
+
     BoardVO attachFileDown(BoardVO boardVO);
 
     void postWrite(BoardVO boardVO);

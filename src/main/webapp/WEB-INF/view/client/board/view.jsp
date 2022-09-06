@@ -42,7 +42,7 @@
             </tr>
             </tbody>
         </table>
-        <a href="/board/list" class="btn btn-primary">목록</a>
+        <a href="/board/list?&${searchVO.qustr}" class="btn btn-primary">목록</a>
         <a href="/board/update?idx=${view.idx}" class="btn btn-primary">수정</a>
         <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/board/delete?idx=${view.idx}" class="btn btn-primary">삭제</a>
         <input type="submit" class="btn btn-primary pull-right" value="글쓰기">
