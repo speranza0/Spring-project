@@ -17,7 +17,8 @@
         <div>
             <div class="col-md-8 card-header py-3">
                 <input type="text" id="searchKeyword" name="searchKeyword" value="${searchVO.searchKeyword}" style="width:300px; height:40px;" placeholder="검색어를 입력하세요." />
-                <a href="#" onclick="fn_search();" class="btn btn-primary">검색</a>
+                <input type="hidden" id="pageIndex" name="pageIndex" value="${searchVO.pageIndex}" />
+                <button type="submit" class="btn btn-primary">검색</button>
             </div>
             <span class="col-md-4" style="text-align: right">총 게시물 ${totCnt} / 페이지 (${searchVO.pageIndex} / ${totalPageCnt})</span>
         </div>
@@ -35,7 +36,7 @@
                 <c:set var ="i" value="${i+1}" />
                 <tr>
                     <td>${listup.idx}</td>
-                    <td><a href="/board/view?idx=${listup.idx}&${searchVO.qustr}">${listup.postTitle}</a></td>
+                    <td><a href="/board/view?idx=${listup.idx}">${listup.postTitle}</a></td>
                     <td>${listup.nickname}</td>
                     <td>${listup.postDate}</td>
                 </tr>
@@ -69,7 +70,6 @@
         <a href="/board/write" class="btn btn-primary pull-right">글쓰기</a>
     </div>
 </div>
-    <input type="hidden" id="pageIndex" name="pageIndex" val="" />
 </form>
 <%@ include file="/WEB-INF/view/common/script.jsp" %>
 </body>

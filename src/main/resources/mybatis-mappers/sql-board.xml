@@ -13,6 +13,7 @@
             </if>
         </where>
     </sql>
+
     <select id="postList" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
         SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username
     <include refid="boardWhere"/>
@@ -29,11 +30,15 @@
     </select>
 
     <select id="attachFileDown" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
-        SELECT * FROM tb_board_list WHERE fileUUID = #{fileUUID}
+        SELECT * FROM tb_board_attach WHERE UUID = #{UUID}
     </select>
 
-    <insert id="postWrite" parameterType="com.devhyun.webmvc.common.services.board.BoardVO">
-        INSERT INTO tb_board_list (username, postTitle, postContent, filename, fileUUID) VALUES(#{username}, #{postTitle}, #{postContent}, #{fileName}, #{fileUUID})
+    <insert id="postWrite" parameterType="com.devhyun.webmvc.common.services.board.BoardVO" useGeneratedKeys="true" keyProperty="idx" keyColumn="idx">
+        INSERT INTO tb_board_list (username, postTitle, postContent) VALUES(#{username}, #{postTitle}, #{postContent})
+    </insert>
+
+    <insert id="postWrite_attach" parameterType="com.devhyun.webmvc.common.services.board.BoardVO">
+        INSERT INTO tb_board_attach (user_id, idx, Origin_File_Name, Upload_Path, File_Ext, File_Size, UUID) VALUES (#{userId}, #{idx}, #{OriginFileName}, #{UploadPath}, #{FileExt}, #{FileSize}, #{UUID})
     </insert>
 
     <update id="postUpdate" parameterType="com.devhyun.webmvc.common.services.board.BoardVO">

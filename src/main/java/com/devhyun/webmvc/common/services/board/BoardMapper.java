@@ -17,6 +17,8 @@ public interface BoardMapper {
 
     void postWrite(BoardVO boardVO);
 
+    void postWrite_attach(BoardVO boardVO);
+
     void postUpdate(BoardVO boardVO);
 
     void postDelete(BoardVO boardVO);

@@ -9,10 +9,4 @@
         $("#listForm").submit();
         return false;
     }
-
-    function fn_search(){
-        $("#pageIndex").val("1");
-        $("#listForm").submit();
-        return false;
-    }
 </script>

@@ -35,17 +35,35 @@ public class FileStore {
         if (file.isEmpty()) {
             return null;
         }
-        String originFilename = file.getOriginalFilename();
+        String originFilename = createOriginFileName(file.getOriginalFilename());
+        String fileExt = fileExt(file.getOriginalFilename());
+        int fileSize = (int) file.getSize();
         String storeFileName = createStoreFileName(originFilename);
         file.transferTo(new File(getFullPath(storeFileName)));
 
-        return BoardVO.builder().fileName(originFilename).fileUUID(storeFileName).build();
+        return BoardVO.builder()
+                .OriginFileName(originFilename)
+                .UploadPath(getFullPath(storeFileName))
+                .FileExt(fileExt)
+                .FileSize(fileSize)
+                .UUID(storeFileName)
+                .build();
+    }
+
+    private String createOriginFileName(String originFilename) {
+        int pos = originFilename.lastIndexOf(".");
+        return originFilename.substring(0, pos);
     }
 
     private String createStoreFileName(String originFilename) {
         String ext = extractExt(originFilename);
         String uuid = UUID.randomUUID().toString();
-        return uuid + "." + ext;
+        return uuid;
+    }
+
+    private String fileExt(String originFilename) {
+        String ext = extractExt(originFilename);
+        return ext;
     }
 
     private String extractExt(String originFilename) {
@@ -55,8 +73,8 @@ public class FileStore {
 
     public ResponseEntity<Resource> downloadAttach(@PathVariable BoardVO param) throws MalformedURLException {
         BoardVO vo = boardService.attachFileDown(param);
-        String storeFileName = vo.getFileUUID();
-        String uploadFileName = vo.getFileName();
+        String storeFileName = vo.getUUID();
+        String uploadFileName = vo.getOriginFileName();
 
         UrlResource resource = new UrlResource("file:" + getFullPath(storeFileName));
         String encodeUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);

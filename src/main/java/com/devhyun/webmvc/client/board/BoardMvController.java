@@ -57,7 +57,7 @@ public class BoardMvController {
         model.addAttribute("totalPageCnt", (int)Math.ceil(totCnt / (double)param.getPageUnit()));
         model.addAttribute("pagination", pagination);
 
-        param.setQustr();
+//        param.setQustr();
         return "client/board/list";
     }
 
@@ -69,10 +69,14 @@ public class BoardMvController {
 
     @PostMapping("/write")
     public String write(@AuthUser UserVO user, BoardVO param) throws ServletException, IOException {
+        param.setUserId(user.getId());
         param.setUsername(user.getUsername());
         BoardVO vo = fileStore.uploadFile(param.getUploadFile());
-        param.setFileName(vo.getFileName());
-        param.setFileUUID(vo.getFileUUID());
+        param.setOriginFileName(vo.getOriginFileName());
+        param.setUploadPath(vo.getUploadPath());
+        param.setFileExt(vo.getFileExt());
+        param.setFileSize(vo.getFileSize());
+        param.setUUID(vo.getUUID());
         boardService.postWrite(param);
         return "redirect:/board/list";
     }
@@ -86,7 +90,6 @@ public class BoardMvController {
             throw new NotFoundException("게시글을 찾을 수 없습니다.");
         }
         model.addAttribute("view", boardVO);
-        param.setQustr();
         return "client/board/view";
     }
 

@@ -13,6 +13,7 @@ public class BoardService {
 
     public void postWrite(BoardVO param) {
         boardMapper.postWrite(param);
+        boardMapper.postWrite_attach(param);
     }
 
     public ArrayList<BoardVO> postList(BoardVO param) {
