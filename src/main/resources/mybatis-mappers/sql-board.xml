@@ -21,7 +21,7 @@
     </select>
 
     <select id="postView" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
-        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username WHERE idx = #{idx}
+        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username LEFT JOIN tb_board_attach tba ON tbl.idx = tba.idx WHERE tbl.idx = #{idx}
     </select>
 
     <select id="getListCnt" resultType="java.lang.Integer">
@@ -47,5 +47,9 @@
     
     <delete id="postDelete">
         DELETE FROM tb_board_list WHERE idx = #{idx}
+    </delete>
+
+    <delete id="fileDelete">
+        DELETE FROM tb_board_attach WHERE idx = #{idx}
     </delete>
 </mapper>

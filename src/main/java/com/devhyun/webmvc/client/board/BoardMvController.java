@@ -101,6 +101,7 @@ public class BoardMvController {
     @GetMapping("/update")
     public String updateView(BoardVO param, Model model) {
         model.addAttribute("updateView", boardService.postView(param));
+        model.addAttribute("detailFile", boardService.attachFileDown(param));
         return "client/board/update";
     }
 
@@ -108,6 +109,11 @@ public class BoardMvController {
     public String update(BoardVO param) {
         boardService.postUpdate(param);
         return "redirect:/board/list";
+    }
+
+    @RequestMapping("/deleteFile")
+    public void deleteFile(BoardVO param) {
+        boardService.fileDelete(param);
     }
 
     @RequestMapping("/delete")

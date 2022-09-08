@@ -27,10 +27,12 @@ public class FileStore {
     @Value("${file.dir}")
     private String fileDir;
 
+    // 파일 path
     public String getFullPath(String filename) {
         return fileDir + filename;
     }
 
+    // 파일 업로드 메서드
     public BoardVO uploadFile(MultipartFile file) throws ServletException, IOException {
         if (file.isEmpty()) {
             return null;
@@ -50,34 +52,39 @@ public class FileStore {
                 .build();
     }
 
+    // 원본 파일 이름 메서드
     private String createOriginFileName(String originFilename) {
         int pos = originFilename.lastIndexOf(".");
         return originFilename.substring(0, pos);
     }
 
+    // UUID 생성 메서드
     private String createStoreFileName(String originFilename) {
         String ext = extractExt(originFilename);
         String uuid = UUID.randomUUID().toString();
         return uuid;
     }
 
+    // 파일 확장자 저장 메서드
     private String fileExt(String originFilename) {
         String ext = extractExt(originFilename);
         return ext;
     }
-
+    
+    // 파일 확장자만 추출하는 메서드
     private String extractExt(String originFilename) {
         int pos = originFilename.lastIndexOf(".");
         return originFilename.substring(pos + 1);
     }
 
+    // 첨부파일 다운로드 메서드
     public ResponseEntity<Resource> downloadAttach(@PathVariable BoardVO param) throws MalformedURLException {
         BoardVO vo = boardService.attachFileDown(param);
-        String storeFileName = vo.getUUID();
         String uploadFileName = vo.getOriginFileName();
+        String fileExt = vo.getFileExt();
 
-        UrlResource resource = new UrlResource("file:" + getFullPath(storeFileName));
-        String encodeUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
+        UrlResource resource = new UrlResource("file:" + vo.getUploadPath());
+        String encodeUploadFileName = UriUtils.encode(uploadFileName + "." + fileExt, StandardCharsets.UTF_8);
         String contentDisposition = "attachment; filename=\"" + encodeUploadFileName + "\"";
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);

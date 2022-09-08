@@ -22,14 +22,28 @@
                 </thead>
                 <tbody>
                 <tr>
+                    <td style="width: 20%;">글 제목</td>
                     <td><input type="text" class="form-control" placeholder="글 제목" name="postTitle" maxlength="50" value="${updateView.postTitle}"></td>
                 </tr>
                 <tr>
+                    <td>내용</td>
                     <td><textarea class="form-control" placeholder="글 내용" name="postContent" maxlength="2048" style="height: 350px;">${updateView.postContent}</textarea></td>
+                </tr>
+                <tr>
+                    <td>첨부파일</td>
+                    <td>
+                        <a href="/board/attachFile?UUID=${updateView.UUID}">${updateView.originFileName}</a>
+                        <a href="/board/fileDelete?idx=${updateView.idx}" type="button" class="btn btn-warning">삭제</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>첨부파일</td>
+                    <td><input type="file" name="uploadFile"></td>
                 </tr>
                 </tbody>
             </table>
-            <input type="submit" class="btn btn-primary pull-right" value="글수정">
+            <button type="submit" class="btn btn-success">수정</button>
+            <a href="/board/view?idx=${updateView.idx}" class="btn btn-danger">취소</a>
         </form>
     </div>
 </div>

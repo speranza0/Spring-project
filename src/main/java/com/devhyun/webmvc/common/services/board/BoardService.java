@@ -43,4 +43,8 @@ public class BoardService {
     public void postDelete(BoardVO param) {
         boardMapper.postDelete(param);
     }
+
+    public void fileDelete(BoardVO param) {
+        boardMapper.fileDelete(param);
+    }
 }

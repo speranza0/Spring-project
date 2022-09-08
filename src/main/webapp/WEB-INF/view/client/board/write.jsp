@@ -22,12 +22,15 @@
                 </thead>
                 <tbody>
                 <tr>
+                    <td style="width: 20%;">글 제목</td>
                     <td><input type="text" class="form-control" placeholder="글 제목" name="postTitle" maxlength="50"></td>
                 </tr>
                 <tr>
+                    <td>내용</td>
                     <td><textarea class="form-control" placeholder="글 내용" name="postContent" maxlength="2048" style="height: 350px;"></textarea></td>
                 </tr>
                 <tr>
+                    <td>첨부파일</td>
                     <td><input type="file" name="uploadFile"></td>
                 </tr>
                 </tbody>
