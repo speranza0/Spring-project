@@ -1,8 +1,8 @@
 package com.devhyun.webmvc.client.board;
 
 import com.devhyun.webmvc.common.core.AuthUser;
-import com.devhyun.webmvc.common.core.Authentication;
 import com.devhyun.webmvc.common.core.MvController;
+import com.devhyun.webmvc.common.core.RoleAdmin;
 import com.devhyun.webmvc.common.exception.NotFoundException;
 import com.devhyun.webmvc.common.services.board.BoardService;
 import com.devhyun.webmvc.common.services.board.BoardVO;
@@ -24,16 +24,16 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 
 @MvController
-@RequestMapping("/board/post")
-public class BoardMvController {
+@RequestMapping("/board/notice")
+public class NoticeMvController {
 
     @Autowired
     private BoardService boardService;
     @Autowired
     private FileStore fileStore;
 
-    @RequestMapping (value = "/list")
-    public String list(@ModelAttribute("searchVO") BoardVO param, Model model) throws UnsupportedEncodingException {
+    @RequestMapping("/list")
+    public String noticeList(@ModelAttribute("searchVO") BoardVO param, Model model) throws UnsupportedEncodingException {
         //페이징 처리
         Pagination pagination = new Pagination();
         pagination.setCurrentPageNo(param.getPageIndex());
@@ -43,7 +43,7 @@ public class BoardMvController {
         param.setFirstIndex(pagination.getFirstRecordIndex());
         param.setRecordCountPerPage(pagination.getRecordCountPerPage());
 
-        int totCnt = boardService.getListCnt(param);
+        int totCnt = boardService.getNoticeListCnt(param);
 
         pagination.setTotalRecordCount(totCnt);
 
@@ -52,23 +52,24 @@ public class BoardMvController {
         param.setPrev(pagination.getXprev());
         param.setNext(pagination.getXnext());
 
-        model.addAttribute("list", boardService.postList(param));
+        model.addAttribute("list", boardService.noticeList(param));
         model.addAttribute("totCnt", totCnt);
         model.addAttribute("totalPageCnt", (int)Math.ceil(totCnt / (double)param.getPageUnit()));
         model.addAttribute("pagination", pagination);
 
 //        param.setQustr();
-        return "client/board/post/list";
+        return "client/board/notice/list";
     }
 
     @GetMapping("/write")
-    @Authentication
-    public String writeView(Model model) {
-        return "client/board/write";
+    @RoleAdmin
+    public String noticeWriteView(BoardVO param) {
+        return "client/board/notice/write";
     }
 
     @PostMapping("/write")
-    public String write(@AuthUser UserVO user, BoardVO param) throws ServletException, IOException {
+    @RoleAdmin
+    public String noticeWrite(@AuthUser UserVO user, BoardVO param) throws ServletException, IOException {
         param.setUserId(user.getId());
         param.setUsername(user.getUsername());
         boardService.postWrite(param);
@@ -81,19 +82,18 @@ public class BoardMvController {
             param.setUUID(vo.getUUID());
             boardService.postWrite_attach(param);
         }
-        return "redirect:/board/post/list";
+        return "redirect:/board/notice/list";
     }
 
-
     @RequestMapping("/view")
-    public String postView(@ModelAttribute("searchVO") BoardVO param, Model model) throws MalformedURLException, UnsupportedEncodingException {
+    public String noticeView(@ModelAttribute("searchVO") BoardVO param, Model model) throws MalformedURLException, UnsupportedEncodingException {
         BoardVO boardVO = boardService.postView(param);
 
         if(boardVO == null) {
             throw new NotFoundException("게시글을 찾을 수 없습니다.");
         }
         model.addAttribute("view", boardVO);
-        return "client/board/post/view";
+        return "client/board/notice/view";
     }
 
     @GetMapping("/attachFile")
@@ -104,7 +104,7 @@ public class BoardMvController {
     @GetMapping("/update")
     public String updateView(BoardVO param, Model model) {
         model.addAttribute("updateView", boardService.postView(param));
-        return "client/board/post/update";
+        return "client/board/notice/update";
     }
 
     @PostMapping("/update")
@@ -120,18 +120,18 @@ public class BoardMvController {
             boardService.postWrite_attach(param);
         }
         boardService.postUpdate(param);
-        return "redirect:/board/post/view?idx=" + param.getIdx();
+        return "redirect:/board/notice/view?idx=" + param.getIdx();
     }
 
     @RequestMapping("/deleteFile")
     public String deleteFile(BoardVO param) {
         boardService.fileDelete(param);
-        return "redirect:/board/post/update?idx=" + param.getIdx();
+        return "redirect:/board/notice/update?idx=" + param.getIdx();
     }
 
     @RequestMapping("/delete")
     public String delete(BoardVO param) {
         boardService.postDelete(param);
-        return "redirect:/board/post/list";
+        return "redirect:/board/notice/list";
     }
 }

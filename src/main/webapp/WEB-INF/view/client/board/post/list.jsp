@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/view/common/header.jsp" %>
-<form method="get" id="listForm" action="/board/list">
+<form method="get" id="listForm" action="/board/post/list">
 <div class="container">
     <div class="row">
         <div>
@@ -32,14 +32,15 @@
             </tr>
             </thead>
             <tbody>
+            <c:set var="i" value="${totCnt - ((searchVO.pageIndex -1) * 10)}" />
             <c:forEach items="${list}" var="listup">
-                <c:set var ="i" value="${i+1}" />
                 <tr>
-                    <td>${listup.idx}</td>
-                    <td><a href="/board/view?idx=${listup.idx}">${listup.postTitle}</a></td>
+                    <td>${i}</td>
+                    <td><a href="/board/post/view?idx=${listup.idx}">${listup.postTitle}</a></td>
                     <td>${listup.nickname}</td>
                     <td>${listup.postDate}</td>
                 </tr>
+                <c:set var="i" value="${i-1}"></c:set>
             </c:forEach>
             </tbody>
         </table>
@@ -67,7 +68,7 @@
                 </ul>
             </div>
         </div>
-        <a href="/board/write" class="btn btn-primary pull-right">글쓰기</a>
+        <a href="/board/post/write" class="btn btn-primary pull-right">글쓰기</a>
     </div>
 </div>
 </form>

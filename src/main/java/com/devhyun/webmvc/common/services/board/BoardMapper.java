@@ -9,9 +9,13 @@ public interface BoardMapper {
 
     ArrayList<BoardVO> postList(BoardVO boardVO);
 
+    ArrayList<BoardVO> noticeList(BoardVO boardVO);
+
     BoardVO postView(BoardVO boardVO);
 
     int getListCnt(BoardVO boardVO);
+
+    int getNoticeListCnt(BoardVO boardVO);
 
     BoardVO attachFileDown(BoardVO boardVO);
 

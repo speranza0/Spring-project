@@ -15,8 +15,14 @@
     </sql>
 
     <select id="postList" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
-        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username
+        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username LEFT JOIN tr_user_role tbur ON tbu.id = tbur.user_id WHERE tbur.role_id = 2
     <include refid="boardWhere"/>
+        ORDER BY idx desc LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+    </select>
+
+    <select id="noticeList" resultType="com.devhyun.webmvc.common.services.board.BoardVO">
+        SELECT * FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username LEFT JOIN tr_user_role tbur ON tbu.id = tbur.user_id WHERE tbur.role_id = 1
+        <include refid="boardWhere"/>
         ORDER BY idx desc LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
     </select>
 
@@ -25,8 +31,13 @@
     </select>
 
     <select id="getListCnt" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM tb_board_list
+        SELECT COUNT(*) FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username LEFT JOIN tr_user_role tbur ON tbu.id = tbur.user_id WHERE tbur.role_id = 2
     <include refid="boardWhere"/>
+    </select>
+
+    <select id="getNoticeListCnt" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tb_board_list tbl LEFT JOIN tb_user tbu ON tbl.username = tbu.username LEFT JOIN tr_user_role tbur ON tbu.id = tbur.user_id WHERE tbur.role_id = 1
+        <include refid="boardWhere"/>
     </select>
 
     <select id="attachFileDown" resultType="com.devhyun.webmvc.common.services.board.BoardVO">

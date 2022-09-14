@@ -24,8 +24,8 @@
   <c:if test="${not empty user}">
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/board/notice">공지사항</a></li>
-        <li><a href="/board/list">게시판</a></li>
+        <li><a href="/board/notice/list">공지사항</a></li>
+        <li><a href="/board/post/list">게시판</a></li>
         <li><a href="#">${user.nickname}님 환영합니다.</a>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -43,8 +43,8 @@
   <c:if test="${empty user}">
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/board/notice">공지사항</a></li>
-        <li><a href="/board/list">게시판</a></li>
+        <li><a href="/board/notice/list">공지사항</a></li>
+        <li><a href="/board/post/list">게시판</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

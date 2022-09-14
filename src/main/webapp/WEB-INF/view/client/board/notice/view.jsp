@@ -39,15 +39,15 @@
             <c:if test="${not empty view.UUID}">
             <tr>
                 <td>첨부파일</td>
-                <td colspan="2"><a href="/board/attachFile?UUID=${view.UUID}">${view.originFileName}.${view.fileExt}</a></td>
+                <td colspan="2"><a href="/board/notice/attachFile?UUID=${view.UUID}">${view.originFileName}.${view.fileExt}</a></td>
             </tr>
             </c:if>
             </tbody>
         </table>
-        <a href="/board/list" class="btn btn-primary">목록</a>
-        <a href="/board/update?idx=${view.idx}" class="btn btn-success">수정</a>
-        <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/board/delete?idx=${view.idx}" class="btn btn-danger">삭제</a>
-        <a href="/board/write" class="btn btn-primary pull-right">글쓰기</a>
+        <a href="/board/notice/list" class="btn btn-primary">목록</a>
+        <a href="/board/notice/update?idx=${view.idx}" class="btn btn-success">수정</a>
+        <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/board/notice/delete?idx=${view.idx}" class="btn btn-danger">삭제</a>
+        <a href="/board/notice/write" class="btn btn-primary pull-right">글쓰기</a>
     </div>
 </div>
 <%@ include file="/WEB-INF/view/common/script.jsp" %>

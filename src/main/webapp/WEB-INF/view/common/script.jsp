@@ -9,4 +9,15 @@
         $("#listForm").submit();
         return false;
     }
+
+    $(document).ready(function() {
+        var thisIndex = "${searchVO.pageIndex}";
+        $(".pagination li a").each(function() {
+            var idx = $(this).parent().index();
+            var thistitle = $(this).attr("title");
+            if(thistitle == thisIndex) {
+                $(".pagination").find("li").eq(idx).addClass("active");
+            }
+        });
+    });
 </script>

@@ -13,6 +13,9 @@ public class BoardService {
 
     public void postWrite(BoardVO param) {
         boardMapper.postWrite(param);
+    }
+
+    public void postWrite_attach(BoardVO param) {
         boardMapper.postWrite_attach(param);
     }
 
@@ -20,8 +23,16 @@ public class BoardService {
         return boardMapper.postList(param);
     }
 
+    public ArrayList<BoardVO> noticeList(BoardVO param) {
+        return boardMapper.noticeList(param);
+    }
+
     public int getListCnt(BoardVO param) {
         return boardMapper.getListCnt(param);
+    }
+
+    public int getNoticeListCnt(BoardVO param) {
+        return boardMapper.getNoticeListCnt(param);
     }
 
     public BoardVO postView(BoardVO param) {
@@ -41,6 +52,7 @@ public class BoardService {
     }
 
     public void postDelete(BoardVO param) {
+        boardMapper.fileDelete(param);
         boardMapper.postDelete(param);
     }
 
