@@ -64,7 +64,7 @@ public class BoardMvController {
     @GetMapping("/write")
     @Authentication
     public String writeView(Model model) {
-        return "client/board/write";
+        return "client/board/post/write";
     }
 
     @PostMapping("/write")

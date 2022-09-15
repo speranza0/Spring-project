@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.devhyun.webmvc.common.services.user.UserMapper">
+    <select id="getIdCnt" parameterType="com.devhyun.webmvc.common.services.user.UserVO" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            tb_user
+        where
+            userid = #{userid}
+    </select>
+
     <select id="selectByUsername" resultType="com.devhyun.webmvc.common.services.user.UserVO">
         SELECT *
         FROM tb_user tbu
@@ -9,7 +18,7 @@
     </select>
 
     <insert id="joinUser" parameterType="com.devhyun.webmvc.common.services.user.UserVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO tb_user (username, password) VALUES(#{username}, #{password})
+        INSERT INTO tb_user (username, userid, nickname, telephone, email, password) VALUES(#{username}, #{userid}, #{nickname}, #{telephone}, #{email}, #{password})
     </insert>
 
     <update id="userModify">

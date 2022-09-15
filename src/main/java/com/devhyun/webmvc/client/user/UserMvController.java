@@ -6,6 +6,8 @@ import com.devhyun.webmvc.common.services.user.UserService;
 import com.devhyun.webmvc.common.services.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @MvController
@@ -28,8 +30,13 @@ public class UserMvController {
         return "client/user/join";
     }
 
+
     @PostMapping("/join")
-    public String join(@ModelAttribute UserVO param, Model model) {
+    public String join(@Validated @ModelAttribute UserVO param, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("userDto", param);
+            return "client/user/join";
+        }
         userService.joinUser(param);
         model.addAttribute("user", param);
         return "client/user/welcome";

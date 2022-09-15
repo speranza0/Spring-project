@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
-    <title>Insert title here</title>
+    <title>사용자 게시판</title>
     <jsp:include page="/WEB-INF/view/common/head.jsp" />
 </head>
 <body>

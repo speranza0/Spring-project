@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
-    <title>Insert title here</title>
+    <title>사용자 게시판</title>
     <jsp:include page="/WEB-INF/view/common/head.jsp" />
 </head>
 <body>
@@ -44,10 +44,10 @@
             </c:if>
             </tbody>
         </table>
-        <a href="/board/list" class="btn btn-primary">목록</a>
-        <a href="/board/update?idx=${view.idx}" class="btn btn-success">수정</a>
-        <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/board/delete?idx=${view.idx}" class="btn btn-danger">삭제</a>
-        <a href="/board/write" class="btn btn-primary pull-right">글쓰기</a>
+        <a href="/board/post/list" class="btn btn-primary">목록</a>
+        <a href="/board/post/update?idx=${view.idx}" class="btn btn-success">수정</a>
+        <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/board/post/delete?idx=${view.idx}" class="btn btn-danger">삭제</a>
+        <a href="/board/post/write" class="btn btn-primary pull-right">글쓰기</a>
     </div>
 </div>
 <%@ include file="/WEB-INF/view/common/script.jsp" %>

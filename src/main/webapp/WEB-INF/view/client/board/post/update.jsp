@@ -6,14 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1">
-    <title>Insert title here</title>
+    <title>사용자 게시판</title>
     <jsp:include page="/WEB-INF/view/common/head.jsp" />
 </head>
 <body>
 <%@ include file="/WEB-INF/view/common/header.jsp" %>
 <div class="container">
     <div class="row">
-        <form method="post" action="/board/update?idx=${updateView.idx}" enctype="multipart/form-data">
+        <form method="post" action="/board/post/update?idx=${updateView.idx}" enctype="multipart/form-data">
             <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
                 <thead>
                 <tr>
@@ -33,8 +33,8 @@
                 <tr>
                     <td>첨부파일</td>
                     <td>
-                        <a href="/board/attachFile?UUID=${updateView.UUID}">${updateView.originFileName}</a>
-                        <a href="/board/deleteFile?idx=${updateView.idx}" type="button" class="btn btn-warning">삭제</a>
+                        <a href="/board/post/attachFile?UUID=${updateView.UUID}">${updateView.originFileName}</a>
+                        <a href="/board/post/deleteFile?idx=${updateView.idx}" type="button" class="btn btn-warning">삭제</a>
                     </td>
                 </tr>
                 </c:if>
@@ -45,7 +45,7 @@
                 </tbody>
             </table>
             <input type="submit" class="btn btn-success" value="수정">
-            <a href="/board/view?idx=${updateView.idx}" class="btn btn-danger">취소</a>
+            <a href="/board/post/view?idx=${updateView.idx}" class="btn btn-danger">취소</a>
         </form>
     </div>
 </div>
