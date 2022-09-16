@@ -24,7 +24,7 @@
     <jsp:include page="/WEB-INF/view/common/head.jsp" />
 
 </head>
-<form commandName="searchVO" id="createForm" action="/user/join" method="post">
+<form action="/user/join" method="post">
     <input type="hidden" id="me_id_yn" name="me_id_yn" value="N"/>
 
     <body class="bg-gradient-primary">
@@ -43,13 +43,13 @@
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="username" name="username" style="text-align:center;"
+                                        <input type="text" class="form-control form-control-user" id="name" name="name" style="text-align:center;"
                                                placeholder="이름">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-8 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="userid" name="userid" style="text-align:center;"
+                                        <input type="text" class="form-control form-control-user" id="username" name="username" style="text-align:center;"
                                                placeholder="아이디">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">

@@ -25,8 +25,6 @@ public class UserVO implements UserDetails {
 
     @NotBlank(message = "아이디는 필수 입력값입니다.")
     @Pattern(regexp = "^[a-z0-9]{4,20}$", message = "아이디는 영어 소문자와 숫자만 사용하여 4~20자리여야 합니다.")
-    private String userid;
-    @NotBlank
     private String username;
 
     @NotBlank(message = "닉네임은 필수 입력값입니다.")
