@@ -22,13 +22,14 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     <jsp:include page="/WEB-INF/view/common/head.jsp" />
+    <%@ include file="/WEB-INF/view/common/script.jsp" %>
 
 </head>
-<form action="/user/join" method="post">
-    <input type="hidden" id="me_id_yn" name="me_id_yn" value="N"/>
+<form commandName="searchVO" id="createForm" action="/user/join" method="post">
+    <input type="hidden" id="idyn" name="idyn" value="N">
 
     <body class="bg-gradient-primary">
-    <%@ include file="/WEB-INF/view/common/header.jsp" %>
+<%--    <%@ include file="/WEB-INF/view/common/header.jsp" %>--%>
     <div class="container">
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -43,14 +44,13 @@
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="name" name="name" style="text-align:center;"
-                                               placeholder="이름">
+                                        <input type="text" class="form-control form-control-user" id="realname" name="realname" style="text-align:center;" placeholder="이름" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-8 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="username" name="username" style="text-align:center;"
-                                               placeholder="아이디">
+                                        <input type="text" class="form-control form-control-user" id="username" name="username" style="text-align:center;" placeholder="아이디"/>
+
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <a href="#" class="btn btn-success btn-icon-split" style="text-align:center;" onclick="duplicate(); return false;">
@@ -63,37 +63,38 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="nickname" name="nickname" style="text-align:center;"
-                                               placeholder="닉네임">
+                                        <input type="text" class="form-control form-control-user" id="nickname" name="nickname" style="text-align:center;" placeholder="닉네임"/>
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="telephone" name="telephone" style="text-align:center;"
-                                               placeholder="전화번호">
+                                        <input type="text" class="form-control form-control-user" id="telephone" name="telephone" style="text-align:center;" placeholder="전화번호" />
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="email" name="email" style="text-align:center;"
-                                               placeholder="이메일 주소">
+                                        <input type="text" class="form-control form-control-user" id="email" name="email" style="text-align:center;" placeholder="이메일 주소" />
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="password" name="password" style="text-align:center;"
-                                               placeholder="비밀번호">
+                                        <input type="password" class="form-control form-control-user" id="password" name="password" style="text-align:center;" placeholder="비밀번호" />
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="password2" style="text-align:center;"
-                                               placeholder="비밀번호 확인">
+                                        <input type="password" class="form-control form-control-user" id="checkPw" style="text-align:center;" placeholder="비밀번호 확인" />
+
                                     </div>
                                 </div>
-                                <input type="submit" class="btn btn-primary btn-user btn-block" value="회원가입" />
+                                <a href="#" class="btn btn-primary btn-user btn-block" onclick="fnSubmit()">회원가입</a>
+                                <input type="reset" class="btn btn-primary btn-user btn-block" value="취소" />
                                 <hr>
-                                <a href="/" class="btn btn-google btn-user btn-block">
+                                <a href="#" class="btn btn-google btn-user btn-block">
                                     아이디/비밀번호 찾기
                                 </a>
                                 <a href="/user/login" class="btn btn-facebook btn-user btn-block">
@@ -119,7 +120,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/script/sb-admin-2.min.js"></script>
-    <%@ include file="/WEB-INF/view/common/script.jsp" %>
     </body>
 </form>
 </html>

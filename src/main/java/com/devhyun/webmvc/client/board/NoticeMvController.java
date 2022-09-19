@@ -102,6 +102,7 @@ public class NoticeMvController {
     }
 
     @GetMapping("/update")
+    @RoleAdmin
     public String updateView(BoardVO param, Model model) {
         model.addAttribute("updateView", boardService.postView(param));
         return "client/board/notice/update";
@@ -130,6 +131,7 @@ public class NoticeMvController {
     }
 
     @RequestMapping("/delete")
+    @RoleAdmin
     public String delete(BoardVO param) {
         boardService.postDelete(param);
         return "redirect:/board/notice/list";

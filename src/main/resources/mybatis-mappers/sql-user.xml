@@ -8,7 +8,7 @@
         from
             tb_user
         where
-            userid = #{userid}
+            username = #{username}
     </select>
 
     <select id="selectByUsername" resultType="com.devhyun.webmvc.common.services.user.UserVO">
@@ -18,7 +18,7 @@
     </select>
 
     <insert id="joinUser" parameterType="com.devhyun.webmvc.common.services.user.UserVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO tb_user (username, userid, nickname, telephone, email, password) VALUES(#{username}, #{userid}, #{nickname}, #{telephone}, #{email}, #{password})
+        INSERT INTO tb_user (username, realname, nickname, email, password, telephone, latest_login, delete_yn, id_yn, regdate) VALUES(#{username}, #{realname}, #{nickname}, #{email}, #{password}, #{telephone}, #{latestlogin}, #{deleteyn}, #{idyn}, #{regdate})
     </insert>
 
     <update id="userModify">

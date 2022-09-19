@@ -16,6 +16,10 @@ public class UserService {
     private final RoleMapper roleMapper;
 
 
+    public int getIdCnt(UserVO param) {
+        return userMapper.getIdCnt(param);
+    }
+
     @Transactional
     public void joinUser(UserVO param) {
         String password = passwordEncoder.encode(param.getPassword());
