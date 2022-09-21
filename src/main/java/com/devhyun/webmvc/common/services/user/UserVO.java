@@ -41,7 +41,7 @@ public class UserVO implements UserDetails {
     private boolean customCheck;
     private List<RoleVO> roles;
 
-    public boolean inCustomCheck() {
+    public boolean isCustomCheck() {
         return customCheck;
     }
 

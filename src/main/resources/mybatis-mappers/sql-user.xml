@@ -17,12 +17,32 @@
         WHERE tbu.username = #{username};
     </select>
 
+    <select id="memberIdSearch" resultType="com.devhyun.webmvc.common.services.user.UserVO">
+        SELECT * FROM tb_user WHERE realname = #{realname} AND telephone = #{telephone}
+    </select>
+
+    <select id="memberPwSearch" parameterType="com.devhyun.webmvc.common.services.user.UserVO" resultType="java.lang.Integer">
+        SELECT count(*) FROM tb_user WHERE username = #{username} AND realname = #{realname} AND telephone = #{telephone}
+    </select>
+
     <insert id="joinUser" parameterType="com.devhyun.webmvc.common.services.user.UserVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO tb_user (username, realname, nickname, email, password, telephone, latest_login, delete_yn, id_yn, regdate) VALUES(#{username}, #{realname}, #{nickname}, #{email}, #{password}, #{telephone}, #{latestlogin}, #{deleteyn}, #{idyn}, #{regdate})
     </insert>
 
+    <update id="updateLastLogin" parameterType="com.devhyun.webmvc.common.services.user.UserVO">
+        UPDATE tb_user SET latest_login = sysdate() WHERE username = #{username}
+    </update>
+
+    <update id="passwordUpdate" parameterType="com.devhyun.webmvc.common.services.user.UserVO">
+        UPDATE tb_user SET password = #{password} WHERE username = #{username} AND realname = #{realname} AND telephone = #{telephone}
+    </update>
+
     <update id="userModify">
-        UPDATE tb_user SET nickname = #{nickname}, password = #{password} WHERE username = #{username}
+        UPDATE tb_user SET nickname = #{nickname}, telephone = #{telephone}, email = #{email} WHERE username = #{username}
+    </update>
+
+    <update id="userPasswordModify">
+        UPDATE tb_user SET nickname = #{nickname}, telephone = #{telephone}, email = #{email}, password = #{password} WHERE username = #{username}
     </update>
 
 </mapper>

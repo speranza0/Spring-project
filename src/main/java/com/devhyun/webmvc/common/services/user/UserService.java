@@ -2,6 +2,7 @@ package com.devhyun.webmvc.common.services.user;
 
 import com.devhyun.webmvc.common.services.role.RoleMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,24 @@ public class UserService {
         return userMapper.getIdCnt(param);
     }
 
+    public UserVO memberIdSearch(UserVO param) {
+        return userMapper.memberIdSearch(param);
+    }
+
+    public int memberPwSearch(UserVO param) {
+        return userMapper.memberPwSearch(param);
+    }
+
+    public void updateLastLogin(UserVO param) {
+        userMapper.updateLastLogin(param);
+    }
+
+    public void passwordUpdate(UserVO param) {
+        String password = passwordEncoder.encode(param.getPassword());
+        param.setPassword(password);
+        userMapper.passwordUpdate(param);
+    }
+
     @Transactional
     public void joinUser(UserVO param) {
         String password = passwordEncoder.encode(param.getPassword());
@@ -31,8 +50,12 @@ public class UserService {
 
     @Transactional
     public void userModify(UserVO param) {
-        String password = passwordEncoder.encode(param.getPassword());
-        param.setPassword(password);
-        userMapper.userModify(param);
+        if(StringUtils.isNotEmpty(param.getPassword())) {
+            String password = passwordEncoder.encode(param.getPassword());
+            param.setPassword(password);
+            userMapper.userPasswordModify(param);
+        } else {
+            userMapper.userModify(param);
+        }
     }
 }

@@ -12,6 +12,7 @@ public class MainMvController {
 	@GetMapping("/")
 	public String main(Model model, @AuthUser UserVO user) throws Exception {
 		System.out.println(user);
+		model.addAttribute("user", user);
 		return "index";
 	}
 	

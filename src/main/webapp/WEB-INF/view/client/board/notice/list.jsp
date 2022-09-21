@@ -72,6 +72,6 @@
     </div>
 </div>
 </form>
-<%@ include file="/WEB-INF/view/common/script.jsp" %>
+<%@ include file="/WEB-INF/view/common/pagingscript.jsp" %>
 </body>
 </html>

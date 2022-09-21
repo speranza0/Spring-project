@@ -5,6 +5,7 @@ import com.devhyun.webmvc.common.services.user.UserMapper;
 import com.devhyun.webmvc.common.services.user.UserService;
 import com.devhyun.webmvc.common.services.user.UserVO;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.RandomStringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class UserMvController {
     public String login() {
         return "client/user/login";
     }
+
 
     @GetMapping("/join")
     public String joinView(Model model) {
@@ -76,6 +78,37 @@ public class UserMvController {
         return "client/user/welcome";
     }
 
+    @GetMapping("/search_id")
+    public String searchId() {
+        return "client/user/search_id";
+    }
+
+    @PostMapping("/search_result_id")
+    public String searchResultId(UserVO param, Model model) {
+        UserVO memberSearch = userService.memberIdSearch(param);
+        model.addAttribute("searchVO", memberSearch);
+        return "client/user/search_result_id";
+    }
+
+    @GetMapping("/search_pw")
+    public String searchPw() {
+        return "client/user/search_pw";
+    }
+
+    @PostMapping("/search_result_pw")
+    public String searchResultPw(UserVO param, Model model) {
+        int memberSearch = userService.memberPwSearch(param);
+        if(memberSearch == 0) {
+            model.addAttribute("msg", "올바르지 않은 정보입니다. 다시 입력해주세요.");
+            return "client/user/search_pw";
+        }
+        String newPw = RandomStringUtils.randomAlphabetic(10);
+        param.setPassword(newPw);
+        userService.passwordUpdate(param);
+        model.addAttribute("newPw", newPw);
+        return "client/user/search_result_pw";
+    }
+
     @GetMapping("/userModify")
     public String modifyView(UserVO param, Model model) {
         UserVO userVO = userMapper.selectByUsername(param.getUsername());
@@ -86,6 +119,6 @@ public class UserMvController {
     @PostMapping("/userModify")
     public String modify(UserVO param, Model model) {
         userService.userModify(param);
-        return "index";
+        return "redirect:/user/userModify?username=" + param.getUsername();
     }
 }

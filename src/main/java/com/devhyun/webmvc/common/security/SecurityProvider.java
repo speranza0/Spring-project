@@ -46,6 +46,7 @@ public class SecurityProvider implements AuthenticationProvider {
             throw new SecurityException("아이디 또는 비밀번호를 확인해주세요.");
         }
 
+        userMapper.updateLastLogin(user);
         List<RoleVO> roles = roleMapper.selectByUserId(user.getId());
         user.setRoles(roles);
 

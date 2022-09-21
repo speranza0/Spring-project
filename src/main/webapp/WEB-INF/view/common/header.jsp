@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/common/common.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +29,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             회원관리<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/user/userModify?username=${user.username}">회원정보 수정</a></li>
@@ -48,7 +47,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             접속하기<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/user/login">로그인</a></li>
@@ -59,5 +58,6 @@
     </div>
   </c:if>
 </nav>
+
 </body>
 </html>

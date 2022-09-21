@@ -7,7 +7,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
 	<title>홈</title>
-	<jsp:include page="/WEB-INF/view/common/head.jsp" />
 </head>
 <body>
 <%@ include file="/WEB-INF/view/common/header.jsp" %>
@@ -46,6 +45,5 @@
 		</a>
 	</div>
 </div>
-<%@ include file="/WEB-INF/view/common/script.jsp" %>
 </body>
 </html>

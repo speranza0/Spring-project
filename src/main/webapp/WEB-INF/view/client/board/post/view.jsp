@@ -50,6 +50,5 @@
         <a href="/board/post/write" class="btn btn-primary pull-right">글쓰기</a>
     </div>
 </div>
-<%@ include file="/WEB-INF/view/common/script.jsp" %>
 </body>
 </html>

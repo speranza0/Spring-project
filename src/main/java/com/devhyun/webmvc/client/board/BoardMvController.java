@@ -12,6 +12,7 @@ import com.devhyun.webmvc.common.services.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -86,7 +87,7 @@ public class BoardMvController {
 
 
     @RequestMapping("/view")
-    public String postView(@ModelAttribute("searchVO") BoardVO param, Model model) throws MalformedURLException, UnsupportedEncodingException {
+    public String postView(BoardVO param, Model model) throws MalformedURLException, UnsupportedEncodingException {
         BoardVO boardVO = boardService.postView(param);
 
         if(boardVO == null) {
@@ -102,9 +103,13 @@ public class BoardMvController {
     }
 
     @GetMapping("/update")
-    public String updateView(BoardVO param, Model model) {
-        model.addAttribute("updateView", boardService.postView(param));
-        return "client/board/post/update";
+    public String updateView(@AuthUser UserVO user, BoardVO param, Model model) {
+        if(user == null || user.getUsername() != param.getUsername()) {
+            throw new AccessDeniedException("error");
+        } else {
+            model.addAttribute("updateView", boardService.postView(param));
+            return "client/board/post/update";
+        }
     }
 
     @PostMapping("/update")
@@ -130,8 +135,12 @@ public class BoardMvController {
     }
 
     @RequestMapping("/delete")
-    public String delete(BoardVO param) {
-        boardService.postDelete(param);
-        return "redirect:/board/post/list";
+    public String delete(@AuthUser UserVO user, BoardVO param) {
+        if(user == null || user.getUsername() != param.getUsername()) {
+            throw new AccessDeniedException("error");
+        } else {
+            boardService.postDelete(param);
+            return "redirect:/board/post/list";
+        }
     }
 }

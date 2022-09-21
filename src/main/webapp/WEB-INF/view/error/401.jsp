@@ -18,6 +18,5 @@
         </div>
     </div>
 </div>
-<%@ include file="/WEB-INF/view/common/script.jsp" %>
 </body>
 </html>

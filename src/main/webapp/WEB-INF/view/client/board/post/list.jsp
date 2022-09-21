@@ -72,6 +72,5 @@
     </div>
 </div>
 </form>
-<%@ include file="/WEB-INF/view/common/script.jsp" %>
 </body>
 </html>
