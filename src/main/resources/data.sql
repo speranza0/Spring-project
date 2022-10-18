@@ -41,18 +41,20 @@ CREATE TABLE IF NOT EXISTS `tb_board_attach` (
   `File_Size` int(11) DEFAULT NULL,
   `UUID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   UNIQUE KEY `UUID` (`UUID`),
-  KEY `FK_tb_board_attach_tb_board_list` (`idx`),
   KEY `FK_tb_board_attach_tb_user` (`user_id`),
+  KEY `FK_tb_board_attach_tb_board_list` (`idx`),
   CONSTRAINT `FK_tb_board_attach_tb_board_list` FOREIGN KEY (`idx`) REFERENCES `tb_board_list` (`idx`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_tb_board_attach_tb_user` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 테이블 데이터 webmvc.tb_board_attach:~3 rows (대략적) 내보내기
+-- 테이블 데이터 webmvc.tb_board_attach:~4 rows (대략적) 내보내기
 DELETE FROM `tb_board_attach`;
 /*!40000 ALTER TABLE `tb_board_attach` DISABLE KEYS */;
 INSERT INTO `tb_board_attach` (`user_id`, `idx`, `Origin_File_Name`, `Upload_Path`, `File_Ext`, `File_Size`, `UUID`) VALUES
-	(NULL, 541, 'movie', 'C:/Users/user/study/file/e68a9d26-1632-4e58-b4f4-c6dfc9c367c5', 'png', 13880, 'e68a9d26-1632-4e58-b4f4-c6dfc9c367c5'),
-	(22, 542, '문서', 'C:/Users/user/study/file/489d8a01-9cb6-44f7-a2c5-28708010c5d9', 'txt', 3, '489d8a01-9cb6-44f7-a2c5-28708010c5d9');
+	(22, 546, '문서', 'C:/Users/user/study/file/7b1c535c-117b-4425-a4c2-da55ff6182f4', 'txt', 3, '7b1c535c-117b-4425-a4c2-da55ff6182f4'),
+	(1, 550, '문서', 'C:/Users/user/study/file/d546f74a-dbb0-4524-9e01-9a6bebe556bb', 'txt', 3, 'd546f74a-dbb0-4524-9e01-9a6bebe556bb'),
+	(1, 551, 'music', 'C:/Users/user/study/file/b159ff81-6ee3-4e61-a333-861059b98ccf', 'png', 26172, 'b159ff81-6ee3-4e61-a333-861059b98ccf'),
+	(1, 547, 'image', 'C:/Users/user/study/file/300e7fcc-71f7-4648-b2c5-8e172ee0092a', 'png', 2408, '300e7fcc-71f7-4648-b2c5-8e172ee0092a');
 /*!40000 ALTER TABLE `tb_board_attach` ENABLE KEYS */;
 
 -- 테이블 webmvc.tb_board_list 구조 내보내기
@@ -62,12 +64,12 @@ CREATE TABLE IF NOT EXISTS `tb_board_list` (
   `postTitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `postContent` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `postDate` datetime DEFAULT current_timestamp(),
-  PRIMARY KEY (`idx`),
-  KEY `FK_tb_board_list_tb_user` (`username`),
+  PRIMARY KEY (`idx`) USING BTREE,
+  KEY `username` (`username`),
   CONSTRAINT `FK_tb_board_list_tb_user` FOREIGN KEY (`username`) REFERENCES `tb_user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=543 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=552 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 테이블 데이터 webmvc.tb_board_list:~517 rows (대략적) 내보내기
+-- 테이블 데이터 webmvc.tb_board_list:~526 rows (대략적) 내보내기
 DELETE FROM `tb_board_list`;
 /*!40000 ALTER TABLE `tb_board_list` DISABLE KEYS */;
 INSERT INTO `tb_board_list` (`idx`, `username`, `postTitle`, `postContent`, `postDate`) VALUES
@@ -589,23 +591,15 @@ INSERT INTO `tb_board_list` (`idx`, `username`, `postTitle`, `postContent`, `pos
 	(539, 'test1', '파일 업로드 테이블 분리 테스트', '테스트123', '2022-09-07 21:36:05'),
 	(540, 'test1', '테스트으으으', '1231ㅁㄴㅇㅁㅇ', '2022-09-07 21:37:34'),
 	(541, 'test1', '테스트~~~', '123123ㅁㄴㅇ', '2022-09-07 21:50:03'),
-	(542, 'test1', 'adadad', '131ㅁㄴㅇㅁㄴㄻ', '2022-09-08 18:48:18');
+	(542, 'test1', 'adadad', '131ㅁㄴㅇㅁㄴㄻ', '2022-09-08 18:48:18'),
+	(543, 'test1', '수정 테스트', 'test', '2022-09-14 15:20:46'),
+	(546, 'test1', '글쓰기만', 'ㅁㄴㅇㅁㄴㅇㅁㄴ', '2022-09-14 15:03:59'),
+	(547, 'test1', '파일 업로드 테스트', 'ㅁㄴㅇㅁㄴㅇㅁㄴㅇ', '2022-09-15 19:34:06'),
+	(548, 'admin', '관리자 테스트', 'test', '2022-09-14 15:56:40'),
+	(549, 'admin', '관리자', '', '2022-09-14 16:03:57'),
+	(550, 'admin', '관리자 게시판 테스트', 'ㅁㄴㅇㅁㄴㅇㅁㄴㅇ', '2022-09-14 16:25:44'),
+	(551, 'admin', '안녕하세요', 'ㅁㄴㅇㅁㄴㅇㅁㄴㅇ', '2022-09-14 16:33:48');
 /*!40000 ALTER TABLE `tb_board_list` ENABLE KEYS */;
-
--- 테이블 webmvc.tb_board_notice 구조 내보내기
-CREATE TABLE IF NOT EXISTS `tb_board_notice` (
-  `idx` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postTitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postContent` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postDate` datetime DEFAULT current_timestamp(),
-  PRIMARY KEY (`idx`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- 테이블 데이터 webmvc.tb_board_notice:~0 rows (대략적) 내보내기
-DELETE FROM `tb_board_notice`;
-/*!40000 ALTER TABLE `tb_board_notice` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tb_board_notice` ENABLE KEYS */;
 
 -- 테이블 webmvc.tb_role 구조 내보내기
 CREATE TABLE IF NOT EXISTS `tb_role` (
@@ -627,20 +621,29 @@ INSERT INTO `tb_role` (`id`, `namekey`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `tb_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `realname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nickname` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telephone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latest_login` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delete_yn` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_yn` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `regdate` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 테이블 데이터 webmvc.tb_user:~4 rows (대략적) 내보내기
+-- 테이블 데이터 webmvc.tb_user:~5 rows (대략적) 내보내기
 DELETE FROM `tb_user`;
 /*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
-INSERT INTO `tb_user` (`id`, `username`, `nickname`, `password`) VALUES
-	(1, 'admin', NULL, '$2a$10$toiM562GREw1Iy7u/eMVkeLrSaX4ZBAl/HLsbayBXpADfa7eHDmDe'),
-	(2, 'user', '유저', '$2a$10$bB5aNQ/QKQCGkHdNPXt76u7ke5CzkutuXY5654IeAHsOFtbD487cO'),
-	(20, 'spring', '스프링', '$2a$10$tiJjD5SLxQ2pG6uzFB3SgOIfxfbf72pSikfwIb2g4lJoZHl4Yf4.C'),
-	(22, 'test1', '테스터', '$2a$10$98rfwbWma5WtCO0Fa3oBlOgJxUrwYzr55Jc8oaWHrCKtl3Chzl8a2');
+INSERT INTO `tb_user` (`id`, `username`, `realname`, `nickname`, `email`, `password`, `telephone`, `latest_login`, `delete_yn`, `id_yn`, `regdate`) VALUES
+	(1, 'admin', NULL, '관리자', NULL, '$2a$10$toiM562GREw1Iy7u/eMVkeLrSaX4ZBAl/HLsbayBXpADfa7eHDmDe', NULL, NULL, NULL, NULL, NULL),
+	(2, 'user', NULL, '유저', NULL, '$2a$10$bB5aNQ/QKQCGkHdNPXt76u7ke5CzkutuXY5654IeAHsOFtbD487cO', NULL, NULL, NULL, NULL, NULL),
+	(20, 'spring', NULL, '스프링', NULL, '$2a$10$tiJjD5SLxQ2pG6uzFB3SgOIfxfbf72pSikfwIb2g4lJoZHl4Yf4.C', NULL, NULL, NULL, NULL, NULL),
+	(22, 'test1', NULL, '테스터', NULL, '$2a$10$98rfwbWma5WtCO0Fa3oBlOgJxUrwYzr55Jc8oaWHrCKtl3Chzl8a2', NULL, '2022-09-28 12:32:47', NULL, NULL, NULL),
+	(24, 'gogogo', '홍길동', '수정테스트2', 'abc@gmail.com', '$2a$10$toiM562GREw1Iy7u/eMVkeLrSaX4ZBAl/HLsbayBXpADfa7eHDmDe', '010-9123-4567', '2022-09-21 17:31:55', NULL, 'Y', '2022-09-19'),
+	(26, 'dong1234', '고길동', '별명바꿨어용', 'abc@gmail.com', '$2a$10$YZLhnNkIceuWWIrJ83yhH.xJAcIG/myojJ8Mi1m2A5hYmoFmqSyae', '010-1234-5678', NULL, NULL, 'Y', '2022-09-19');
 /*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
 
 -- 테이블 webmvc.tr_user_role 구조 내보내기
@@ -649,18 +652,20 @@ CREATE TABLE IF NOT EXISTS `tr_user_role` (
   `role_id` int(11) DEFAULT NULL,
   KEY `FK_tr_user_role_tb_user` (`user_id`),
   KEY `FK_tr_user_role_tb_role` (`role_id`),
-  CONSTRAINT `FK_tr_user_role_tb_role` FOREIGN KEY (`role_id`) REFERENCES `tb_role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_tr_user_role_tb_user` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_tr_user_role_tb_role` FOREIGN KEY (`role_id`) REFERENCES `tb_role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 테이블 데이터 webmvc.tr_user_role:~4 rows (대략적) 내보내기
+-- 테이블 데이터 webmvc.tr_user_role:~6 rows (대략적) 내보내기
 DELETE FROM `tr_user_role`;
 /*!40000 ALTER TABLE `tr_user_role` DISABLE KEYS */;
 INSERT INTO `tr_user_role` (`user_id`, `role_id`) VALUES
 	(1, 1),
 	(2, 2),
 	(20, 2),
-	(22, 2);
+	(22, 2),
+	(24, 2),
+	(25, 2),
+	(26, 2);
 /*!40000 ALTER TABLE `tr_user_role` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
